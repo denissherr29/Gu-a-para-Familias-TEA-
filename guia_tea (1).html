@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía para Familias TEA - Deniss Alejandra Lozano Herrera</title>
+<style>
+  :root {
+    --c1: #e0f2fe;
+    --c2: #d1fae5;
+    --c3: #fef3c7;
+    --c4: #f3e8ff;
+    --c5: #ffe4e6;
+    --text: #334155;
+    --text2: #475569;
+    --puzzle: #0ea5e9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--c1); color: var(--text); line-height: 1.6;
+    overflow-x: hidden;
+  }
+  .puzzle-bg {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .puzzle-piece {
+    position: absolute; opacity: 0.18;
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+  }
+  .p1 { top: 8%; left: 5%; width: 60px; animation-delay: 0s; color: var(--puzzle); }
+  .p2 { top: 20%; right: 8%; width: 50px; animation-delay: 1s; color: #8b5cf6; }
+  .p3 { top: 45%; left: 3%; width: 55px; animation-delay: 2s; color: #10b981; }
+  .p4 { top: 60%; right: 5%; width: 65px; animation-delay: 1.5s; color: #f59e0b; }
+  .p5 { top: 75%; left: 10%; width: 45px; animation-delay: 0.5s; color: #ec4899; }
+  .p6 { top: 85%; right: 12%; width: 55px; animation-delay: 2.5s; color: #6366f1; }
+  .p7 { top: 30%; left: 50%; width: 40px; animation-delay: 3s; color: #14b8a6; }
+  .p8 { top: 55%; left: 85%; width: 50px; animation-delay: 1.2s; color: #f97316; }
+
+  .wrap { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 20px; }
+  header {
+    text-align: center; padding: 40px 20px 30px;
+    background: linear-gradient(135deg, var(--c2), var(--c3), var(--c4));
+    border-radius: 24px; margin-bottom: 30px; position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  }
+  header h1 {
+    margin: 0; font-size: 2rem; color: #0f172a; letter-spacing: 0.5px;
+  }
+  header p.sub {
+    margin: 12px 0 0; font-size: 1.1rem; color: var(--text2);
+  }
+  header .author {
+    margin-top: 14px; font-weight: 600; color: #0369a1; font-size: 1rem;
+  }
+  .puzzle-icon {
+    width: 70px; height: 70px; margin: 0 auto 15px;
+    background: #fff; border-radius: 16px; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); font-size: 2.2rem;
+  }
+
+  nav {
+    background: #fff; border-radius: 16px; padding: 16px 20px; margin-bottom: 28px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06); display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+  }
+  nav a {
+    text-decoration: none; color: #0369a1; font-weight: 600; font-size: 0.9rem;
+    padding: 8px 14px; border-radius: 10px; background: #f0f9ff; transition: background 0.2s;
+  }
+  nav a:hover { background: #e0f2fe; }
+
+  section {
+    background: #fff; border-radius: 20px; padding: 28px 30px; margin-bottom: 28px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06); position: relative;
+  }
+  section h2 {
+    margin-top: 0; font-size: 1.4rem; display: flex; align-items: center; gap: 10px;
+    color: #0f172a;
+  }
+  section h2 .icon { font-size: 1.6rem; }
+
+  .alarm-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 16px;
+  }
+  .alarm-card {
+    background: linear-gradient(135deg, #fff1f2, #ffe4e6); border-radius: 16px; padding: 18px;
+    border-left: 5px solid #f43f5e; transition: transform 0.2s;
+  }
+  .alarm-card:hover { transform: translateY(-4px); }
+  .alarm-card h4 { margin: 0 0 6px; font-size: 1rem; color: #be123c; }
+  .alarm-card p { margin: 0; font-size: 0.95rem; color: var(--text2); }
+
+  .tips-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 16px;
+  }
+  .tip-card {
+    background: linear-gradient(135deg, #f0fdf4, #d1fae5); border-radius: 16px; padding: 18px;
+    border-left: 5px solid #10b981; transition: transform 0.2s;
+  }
+  .tip-card:hover { transform: translateY(-4px); }
+  .tip-card h4 { margin: 0 0 6px; font-size: 1rem; color: #047857; }
+  .tip-card p { margin: 0; font-size: 0.95rem; color: var(--text2); }
+  .tip-card .age-tag {
+    display: inline-block; margin-top: 10px; font-size: 0.75rem; padding: 4px 10px;
+    background: #ecfdf5; color: #065f46; border-radius: 20px; font-weight: 600;
+  }
+
+  .place-card {
+    background: linear-gradient(135deg, #eff6ff, #dbeafe); border-radius: 16px; padding: 18px;
+    border-left: 5px solid #3b82f6; transition: transform 0.2s;
+  }
+  .place-card:hover { transform: translateY(-4px); }
+  .place-card h4 { margin: 0 0 6px; font-size: 1rem; color: #1e40af; }
+  .place-card p { margin: 0; font-size: 0.95rem; color: var(--text2); }
+  .place-card .loc { font-size: 0.8rem; color: #64748b; margin-top: 8px; }
+
+  .book-card {
+    background: linear-gradient(135deg, #fefce8, #fef9c3); border-radius: 16px; padding: 18px;
+    border-left: 5px solid #eab308; transition: transform 0.2s;
+  }
+  .book-card:hover { transform: translateY(-4px); }
+  .book-card h4 { margin: 0 0 6px; font-size: 1rem; color: #a16207; }
+  .book-card p { margin: 0; font-size: 0.95rem; color: var(--text2); }
+  .book-card .author-tag { font-size: 0.8rem; color: #a16207; margin-top: 8px; font-weight: 600; }
+
+  .info-card {
+    background: linear-gradient(135deg, #faf5ff, #f3e8ff); border-radius: 16px; padding: 18px;
+    border-left: 5px solid #a855f7; transition: transform 0.2s;
+  }
+  .info-card:hover { transform: translateY(-4px); }
+  .info-card h4 { margin: 0 0 6px; font-size: 1rem; color: #7e22ce; }
+  .info-card p { margin: 0; font-size: 0.95rem; color: var(--text2); }
+
+  .forum-box {
+    background: #fff; border-radius: 20px; padding: 28px 30px; margin-bottom: 28px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  }
+  .forum-box h2 { margin-top: 0; }
+  .comment-form { display: flex; flex-direction: column; gap: 12px; margin-bottom: 22px; }
+  .comment-form input, .comment-form textarea {
+    padding: 12px 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-family: inherit; font-size: 1rem;
+    outline: none; transition: border-color 0.2s;
+  }
+  .comment-form input:focus, .comment-form textarea:focus { border-color: #0ea5e9; }
+  .comment-form textarea { min-height: 90px; resize: vertical; }
+  .btn {
+    align-self: flex-start; padding: 12px 24px; border: none; border-radius: 12px;
+    background: linear-gradient(135deg, #0ea5e9, #6366f1); color: #fff; font-size: 1rem; font-weight: 600;
+    cursor: pointer; box-shadow: 0 4px 10px rgba(99,102,241,0.25); transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(99,102,241,0.35); }
+  .comments-list { display: flex; flex-direction: column; gap: 14px; }
+  .comment-item {
+    background: #f8fafc; border-radius: 14px; padding: 16px 18px; border-left: 4px solid #8b5cf6;
+  }
+  .comment-item .name { font-weight: 700; color: #4c1d95; font-size: 0.95rem; }
+  .comment-item .date { font-size: 0.75rem; color: #94a3b8; margin-bottom: 6px; }
+  .comment-item .text { color: var(--text2); font-size: 0.95rem; }
+  .empty-msg { color: #94a3b8; font-style: italic; padding: 20px; text-align: center; }
+
+  .intro-text {
+    background: #fff; border-radius: 20px; padding: 24px 30px; margin-bottom: 28px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06); font-size: 1.05rem; color: var(--text2);
+  }
+  .intro-text strong { color: #0f172a; }
+
+  .highlight-box {
+    background: linear-gradient(135deg, #fff7ed, #ffedd5); border-radius: 16px; padding: 20px 24px;
+    margin-top: 18px; border-left: 5px solid #f97316;
+  }
+  .highlight-box h4 { margin: 0 0 8px; color: #c2410c; }
+  .highlight-box p { margin: 0; color: var(--text2); font-size: 0.95rem; }
+
+  footer {
+    text-align: center; padding: 24px; font-size: 0.9rem; color: #64748b;
+  }
+  footer .puzzle-row { font-size: 1.4rem; margin-bottom: 8px; letter-spacing: 4px; }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.5rem; }
+    .wrap { padding: 14px; }
+    section, .forum-box, .intro-text { padding: 20px; }
+    nav a { font-size: 0.8rem; padding: 6px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="puzzle-bg" aria-hidden="true">
+  <svg class="puzzle-piece p1" viewBox="0 0 100 100"><path d="M20,10 h25 a10,10 0 0,1 10,10 v15 a10,10 0 0,0 10,10 h25 v25 a10,10 0 0,1 -10,10 h-15 a10,10 0 0,0 -10,10 v15 a10,10 0 0,1 -10,10 h-25 v-25 a10,10 0 0,0 -10,-10 h-15 a10,10 0 0,1 -10,-10 v-15 a10,10 0 0,0 10,-10 h15 a10,10 0 0,1 10,-10 z" fill="currentColor"/></svg>
+  <svg class="puzzle-piece p2" viewBox="0 0 100 100"><path d="M20,10 h25 a10,10 0 0,1 10,10 v15 a10,10 0 0,0 10,10 h25 v25 a10,10 0 0,1 -10,10 h-15 a10,10 0 0,0 -10,10 v15 a10,10 0 0,1 -10,10 h-25 v-25 a10,10 0 0,0 -10,-10 h-15 a10,10 0 0,1 -10,-10 v-15 a10,10 0 0,0 10,-10 h15 a10,10 0 0,1 10,-10 z" fill="currentColor"/></svg>
+  <svg class="puzzle-piece p3" viewBox="0 0 100 100"><path d="M20,10 h25 a10,10 0 0,1 10,10 v15 a10,10 0 0,0 10,10 h25 v25 a10,10 0 0,1 -10,10 h-15 a10,10 0 0,0 -10,10 v15 a10,10 0 0,1 -10,10 h-25 v-25 a10,10 0 0,0 -10,-10 h-15 a10,10 0 0,1 -10,-10 v-15 a10,10 0 0,0 10,-10 h15 a10,10 0 0,1 10,-10 z" fill="currentColor"/></svg>
+  <svg class="puzzle-piece p4" viewBox="0 0 100 100"><path d="M20,10 h25 a10,10 0 0,1 10,10 v15 a10,10 0 0,0 10,10 h25 v25 a10,10 0 0,1 -10,10 h-15 a10,10 0 0,0 -10,10 v15 a10,10 0 0,1 -10,10 h-25 v-25 a10,10 0 0,0 -10,-10 h-15 a10,10 0 0,1 -10,-10 v-15 a10,10 0 0,0 10,-10 h15 a10,10 0 0,1 10,-10 z" fill="currentColor"/></svg>
+  <svg class="puzzle-piece p5" viewBox="0 0 100 100"><path d="M20,10 h25 a10,10 0 0,1 10,10 v15 a10,10 0 0,0 10,10 h25 v25 a10,10 0 0,1 -10,10 h-15 a10,10 0 0,0 -10,10 v15 a10,10 0 0,1 -10,10 h-25 v-25 a10,10 0 0,0 -10,-10 h-15 a10,10 0 0,1 -10,-10 v-15 a10,10 0 0,0 10,-10 h15 a10,10 0 0,1 10,-10 z" fill="currentColor"/></svg>
+  <svg class="puzzle-piece p6" viewBox="0 0 100 100"><path d="M20,10 h25 a10,10 0 0,1 10,10 v15 a10,10 0 0,0 10,10 h25 v25 a10,10 0 0,1 -10,10 h-15 a10,10 0 0,0 -10,10 v15 a10,10 0 0,1 -10,10 h-25 v-25 a10,10 0 0,0 -10,-10 h-15 a10,10 0 0,1 -10,-10 v-15 a10,10 0 0,0 10,-10 h15 a10,10 0 0,1 10,-10 z" fill="currentColor"/></svg>
+  <svg class="puzzle-piece p7" viewBox="0 0 100 100"><path d="M20,10 h25 a10,10 0 0,1 10,10 v15 a10,10 0 0,0 10,10 h25 v25 a10,10 0 0,1 -10,10 h-15 a10,10 0 0,0 -10,10 v15 a10,10 0 0,1 -10,10 h-25 v-25 a10,10 0 0,0 -10,-10 h-15 a10,10 0 0,1 -10,-10 v-15 a10,10 0 0,0 10,-10 h15 a10,10 0 0,1 10,-10 z" fill="currentColor"/></svg>
+  <svg class="puzzle-piece p8" viewBox="0 0 100 100"><path d="M20,10 h25 a10,10 0 0,1 10,10 v15 a10,10 0 0,0 10,10 h25 v25 a10,10 0 0,1 -10,10 h-15 a10,10 0 0,0 -10,10 v15 a10,10 0 0,1 -10,10 h-25 v-25 a10,10 0 0,0 -10,-10 h-15 a10,10 0 0,1 -10,-10 v-15 a10,10 0 0,0 10,-10 h15 a10,10 0 0,1 10,-10 z" fill="currentColor"/></svg>
+</div>
+
+<div class="wrap">
+
+  <header>
+    <div class="puzzle-icon">🧩</div>
+    <h1>Guía para Familias: TEA</h1>
+    <p class="sub">Orientación clara y amorosa para padres de niños y adolescentes con y sin diagnóstico.</p>
+    <div class="author">Deniss Alejandra Lozano Herrera<br>Futura Licenciada en Psicopedagogía</div>
+  </header>
+
+  <nav>
+    <a href="#alarmas">Señales de alarma</a>
+    <a href="#autoregulacion">Autoregulación</a>
+    <a href="#padres">Consejos para padres</a>
+    <a href="#lugares">Lugares de atención</a>
+    <a href="#libros">Libros recomendados</a>
+    <a href="#educacion">Educación y derechos</a>
+    <a href="#foro">Foro</a>
+  </nav>
+
+  <div class="intro-text">
+    <strong>¿Qué es el TEA?</strong> El Trastorno del Espectro Autista (TEA) es una condición del neurodesarrollo que afecta la comunicación, la interacción social y puede incluir patrones de comportamiento o intereses repetitivos. Cada persona en el espectro es única, por eso la detección temprana y el acompañamiento adecuado marcan una gran diferencia. Esta página busca orientarte con señales de alarma, estrategias prácticas de autoregulación, recursos de apoyo y espacios de contención para que ninguna familia camine sola.
+  </div>
+
+  <section id="alarmas">
+    <h2><span class="icon">🚨</span> Señales de Alarma: ¿Cuándo acudir con un especialista?</h2>
+    <p style="color:var(--text2); margin-top:6px;">Si observas una o más de estas señales en tu hijo o hija, te sugiero consultar con un profesional (psicopedagogo, psicólogo, neurólogo o pediatra):</p>
+    <div class="alarm-grid">
+      <div class="alarm-card">
+        <h4>🗣️ Lenguaje</h4>
+        <p>No balbucea a los 12 meses, no dice palabras a los 16 meses o no usa frases a los 24 meses. Pérdida de habilidades del lenguaje ya adquiridas.</p>
+      </div>
+      <div class="alarm-card">
+        <h4>👀 Contacto visual</h4>
+        <p>Mira poco a los ojos, parece no reconocer rostros familiares o no responde a su nombre de manera consistente.</p>
+      </div>
+      <div class="alarm-card">
+        <h4>🤝 Interacción social</h4>
+        <p>No señala objetos con el dedo, no comparte intereses, no juega de manera imaginativa o prefiere estar solo.</p>
+      </div>
+      <div class="alarm-card">
+        <h4>🔄 Comportamientos repetitivos</h4>
+        <p>Movimientos repetitivos (aleteo de manos, girar objetos), intereses muy intensos y limitados, o apego excesivo a rutinas.</p>
+      </div>
+      <div class="alarm-card">
+        <h4>🧠 Respuesta sensorial</h4>
+        <p>Sobre o sub-reacción a sonidos, texturas, luces u olores. Rechazo extremo a ciertos alimentos o ropa.</p>
+      </div>
+      <div class="alarm-card">
+        <h4>⏳ Desarrollo general</h4>
+        <p>Retrasos en habilidades motoras, cognitivas o de autocuidado comparados con otros niños de su edad.</p>
+      </div>
+    </div>
+    <div class="highlight-box">
+      <h4>🩺 ¿Qué especialista debo buscar?</h4>
+      <p>Comienza con un <strong>pediatra</strong> o <strong>médico general</strong> que te derive. Luego puedes acudir a un <strong>psicólogo</strong> para evaluación cognitiva y conductual, un <strong>psicopedagogo</strong> para intervención educativa, un <strong>neurólogo</strong> para descartar otras condiciones, un <strong>terapeuta del lenguaje</strong> si hay dificultades de comunicación, o un <strong>terapeuta ocupacional</strong> para apoyo sensorial y motor. Un equipo multidisciplinario siempre es lo ideal.</p>
+    </div>
+    <p style="margin-top:18px; color:#b45309; font-weight:600; font-size:0.95rem;">💡 Recuerda: estas señales no son un diagnóstico, solo una guía para buscar ayuda profesional a tiempo. La detección temprana mejora significativamente la calidad de vida.</p>
+  </section>
+
+  <section id="autoregulacion">
+    <h2><span class="icon">🧘</span> Tips de Autoregulación para Niños y Adolescentes</h2>
+    <p style="color:var(--text2); margin-top:6px;">La autoregulación ayuda a manejar la ansiedad, las emociones intensas y la sobrecarga sensorial. Aquí van estrategias prácticas que puedes aplicar desde casa:</p>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <h4>🌬️ Respiración con burbujas</h4>
+        <p>Soplar burbujas de jabón lentamente ayuda a regular la respiración y calmar la ansiedad de forma lúdica.</p>
+        <span class="age-tag">Ideal para niños</span>
+      </div>
+      <div class="tip-card">
+        <h4>🎧 Espacio sensorial</h4>
+        <p>Crear un rincón tranquilo con iluminación tenue, auriculares con cancelación de ruido, pelotas sensoriales o una manta con peso.</p>
+        <span class="age-tag">Niños y adolescentes</span>
+      </div>
+      <div class="tip-card">
+        <h4>⏱️ Rutinas visuales</h4>
+        <p>Usar horarios con imágenes o pictogramas para que el día a día sea predecible y reducir la ansiedad ante lo desconocido.</p>
+        <span class="age-tag">Niños</span>
+      </div>
+      <div class="tip-card">
+        <h4>🖐️ Masajes o presión profunda</h4>
+        <p>Abrazos firmes, masajes en manos o rodar entre almohadas puede brindar la propiocepción que calma el sistema nervioso.</p>
+        <span class="age-tag">Todas las edades</span>
+      </div>
+      <div class="tip-card">
+        <h4>🎵 Música y ritmo</h4>
+        <p>Escuchar música suave, tocar instrumentos de percusión o caminar al ritmo de una melodía organiza la energía emocional.</p>
+        <span class="age-tag">Niños y adolescentes</span>
+      </div>
+      <div class="tip-card">
+        <h4>📝 Diario de emociones</h4>
+        <p>Escribir, dibujar o usar una app para registrar cómo se siente antes y después de una actividad. Fomenta la conciencia emocional.</p>
+        <span class="age-tag">Adolescentes</span>
+      </div>
+      <div class="tip-card">
+        <h4>🚶 Pausas de movimiento</h4>
+        <p>Intervalos breves de estiramientos, saltos, caminar o balancearse entre tareas escolares para descargar tensión.</p>
+        <span class="age-tag">Todas las edades</span>
+      </div>
+      <div class="tip-card">
+        <h4>🤝 Frases de apoyo visual</h4>
+        <p>Tarjetas con frases como "Estoy seguro", "Esto pasará" o "Puedo pedir ayuda" para usar en momentos de estrés.</p>
+        <span class="age-tag">Niños y adolescentes</span>
+      </div>
+      <div class="tip-card">
+        <h4>🧸 Objetos de transición</h4>
+        <p>Un peluche, manta o juguete específico que acompañe al niño en situaciones nuevas o estresantes para darle seguridad.</p>
+        <span class="age-tag">Niños</span>
+      </div>
+      <div class="tip-card">
+        <h4>🧊 Botella de la calma</h4>
+        <p>Un frasco con agua, pegamento transparente y brillantina que el niño agita y observa hasta que las lentejuelas se asientan. Ideal para pausas de autorregulación.</p>
+        <span class="age-tag">Niños</span>
+      </div>
+      <div class="tip-card">
+        <h4>🎮 Técnicas de grounding (anclaje)</h4>
+        <p>Para adolescentes: nombrar 5 cosas que ves, 4 que tocas, 3 que escuchas, 2 que hueles y 1 que saboreas para volver al presente.</p>
+        <span class="age-tag">Adolescentes</span>
+      </div>
+      <div class="tip-card">
+        <h4>🏃 Colchoneta de chapoteo</h4>
+        <p>Dejar que el niño salte, ruede o se acueste en una colchoneta gruesa para descargar energía y reorganizar el sistema sensorial.</p>
+        <span class="age-tag">Niños</span>
+      </div>
+      <div class="tip-card">
+        <h4>🌿 Esencias y aromas suaves</h4>
+        <p>Aromaterapia con lavanda o manzanilla en el espacio de descanso para inducar calma (siempre verificando que no cause molestia).</p>
+        <span class="age-tag">Todas las edades</span>
+      </div>
+      <div class="tip-card">
+        <h4>🧩 Rompecabezas o construcciones</h4>
+        <p>Actividades de encaje, bloques o LEGO que permiten enfocar la atención y reducir la ansiedad mediante la concentración repetitiva.</p>
+        <span class="age-tag">Niños y adolescentes</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="padres">
+    <h2><span class="icon">💜</span> Consejos para Padres y Cuidadores</h2>
+    <p style="color:var(--text2); margin-top:6px;">Cuidar de un niño o adolescente en el espectro también implica cuidar de ti. Aquí van algunas recomendaciones para fortalecerte como familia:</p>
+    <div class="tips-grid">
+      <div class="info-card">
+        <h4>🤲 Acepta el proceso</h4>
+        <p>El diagnóstico no define a tu hijo. Es una herramienta para entenderlo mejor y brindarle el apoyo que necesita. Dale tiempo a las emociones y busca apoyo si las necesitas.</p>
+      </div>
+      <div class="info-card">
+        <h4>👨‍👩‍👧 Busca redes de apoyo</h4>
+        <p>Unirte a grupos de padres, asociaciones o foros te hará sentir acompañado. Compartir experiencias reduce la soledad y enriquece tu caja de herramientas.</p>
+      </div>
+      <div class="info-card">
+        <h4>🎯 Celebra los pequeños logros</h4>
+        <p>Cada avance cuenta. Desde hacer contacto visual hasta pedir algo con palabras. Reconocer los logros motiva al niño y fortalece el vínculo familiar.</p>
+      </div>
+      <div class="info-card">
+        <h4>🛡️ Protégelo del juicio ajeno</h4>
+        <p>No todos entenderán las conductas de tu hijo. Educa con calma a quienes lo rodean y establece límites sanos con personas que no aportan.</p>
+      </div>
+      <div class="info-card">
+        <h4>🔄 Sé flexible con las rutinas</h4>
+        <p>Las rutinas ayudan, pero la vida es impredecible. Prepara a tu hijo para los cambios con anticipación usando avisos visuales o sociales.</p>
+      </div>
+      <div class="info-card">
+        <h4>🧘 Cuida tu bienestar</h4>
+        <p>No puedes dar de un vaso vacío. Reserva tiempo para ti, pide ayuda cuando la necesites y recuerda que ser padre también implica permitirte descansar.</p>
+      </div>
+      <div class="info-card">
+        <h4>📚 Infórmate constantemente</h4>
+        <p>El conocimiento sobre el TEA avanza cada día. Lee libros, asiste a talleres y mantente en contacto con profesionales actualizados.</p>
+      </div>
+      <div class="info-card">
+        <h4>❤️ Confía en tu intuición</h4>
+        <p>Tú conoces a tu hijo mejor que nadie. Si algo no te convence de una terapia o profesional, busca una segunda opinión. Eres su principal defensor.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="lugares">
+    <h2><span class="icon">🏥</span> Lugares y Organizaciones de Atención Psicopedagógica</h2>
+    <p style="color:var(--text2); margin-top:6px;">Estas son algunas instituciones y organizaciones reconocidas en México y Latinoamérica donde puedes buscar evaluación, terapia y acompañamiento:</p>
+    <div class="tips-grid">
+      <div class="place-card">
+        <h4>🧩 Centro de Autismo Teletón (CIAT)</h4>
+        <p>Ofrece diagnóstico, rehabilitación integral e intervención temprana para niños y adolescentes con TEA. Cuenta con terapeutas ocupacionales, psicólogos, psicopedagogos y médicos especializados.</p>
+        <div class="loc">📍 Ciudad de México y otras sedes en México | 🔗 autismoteleton.org</div>
+      </div>
+      <div class="place-card">
+        <h4>🧩 Autismo México A.C.</h4>
+        <p>Asociación civil dedicada a la atención integral de personas con autismo. Brinda terapias, talleres para padres, capacitación docente y abogacía por los derechos del espectro.</p>
+        <div class="loc">📍 Ciudad de México | 🔗 autismomexico.org</div>
+      </div>
+      <div class="place-card">
+        <h4>🧩 Centro de Atención al Autismo (CAA)</h4>
+        <p>Institución especializada en evaluación, diagnóstico y tratamiento del TEA. Ofrece terapia del lenguaje, psicoterapia, psicopedagogía y terapia ocupacional.</p>
+        <div class="loc">📍 Monterrey, Nuevo León, México | 🔗 centroatencionalautismo.com</div>
+      </div>
+      <div class="place-card">
+        <h4>🧩 Fundación Diego</h4>
+        <p>Centro de día que proporciona atención integral, terapias conductuales, habilidades sociales y talleres de vida independiente para personas con TEA de todas las edades.</p>
+        <div class="loc">📍 Ciudad de México | 🔗 fundaciondiego.org</div>
+      </div>
+      <div class="place-card">
+        <h4>🧩 Organización Nacional de Autismo de México (ONAM)</h4>
+        <p>Red de organizaciones de la sociedad civil que trabajan por los derechos de las personas con TEA en todo el país. Pueden orientarte sobre centros cercanos a tu localidad.</p>
+        <div class="loc">📍 República Mexicana | 🔗 onam.org.mx</div>
+      </div>
+      <div class="place-card">
+        <h4>🧩 CAID - Centro de Atención Integral para la Discapacidad</h4>
+        <p>Gobierno de República Dominicana. Ofrece atención gratuita e integral a niños y adolescentes con discapacidad, incluyendo TEA, con servicios de psicopedagogía, terapia ocupacional y del lenguaje.</p>
+        <div class="loc">📍 República Dominicana | 🔗 caid.gob.do</div>
+      </div>
+      <div class="place-card">
+        <h4>🧩 Fundación Asperger Argentina</h4>
+        <p>Organización que brinda apoyo a personas con autismo y Asperger, con talleres, grupos de contención para familias y recursos educativos actualizados.</p>
+        <div class="loc">📍 Argentina | 🔗 asperger.org.ar</div>
+      </div>
+      <div class="place-card">
+        <h4>🧩 TEACCH - Programas en Latinoamérica</h4>
+        <p>Modelo de intervención educativa ampliamente reconocido. Existen centros y profesionales capacitados en varios países de Latinoamérica que aplican esta metodología estructurada.</p>
+        <div class="loc">📍 Consulta centros en tu país | 🔗 teacch.com</div>
+      </div>
+    </div>
+    <div class="highlight-box">
+      <h4>💡 ¿Cómo elegir un buen centro?</h4>
+      <p>Verifica que cuenten con <strong>profesionales certificados</strong> (cedula profesional vigente), que ofrezcan un <strong>plan de intervención individualizado</strong>, que te permitan <strong>observar sesiones</strong> y que exista <strong>comunicación constante</strong> contigo sobre el progreso. Desconfía de promesas de "curas" o tratamientos milagrosos sin respaldo científico.</p>
+    </div>
+  </section>
+
+  <section id="libros">
+    <h2><span class="icon">📚</span> Libros Recomendados para Familias</h2>
+    <p style="color:var(--text2); margin-top:6px;">La lectura es una poderosa aliada para entender el espectro autista y fortalecer tus herramientas como padre o cuidador. Aquí van algunas recomendaciones:</p>
+    <div class="tips-grid">
+      <div class="book-card">
+        <h4>Diez cosas que todo niño con autismo desearía que supieras</h4>
+        <p>Un libro accesible y emotivo que ayuda a entender el mundo desde la perspectiva de un niño con autismo. Perfecto para padres que inician este camino.</p>
+        <div class="author-tag">✍️ Ellen Notbohm</div>
+      </div>
+      <div class="book-card">
+        <h4>Una mente diferente</h4>
+        <p>Temple Grandin, una de las voces más reconocidas del espectro, comparte su experiencia de vida y cómo piensa el cerebro autista. Inspirador y revelador.</p>
+        <div class="author-tag">✍️ Temple Grandin</div>
+      </div>
+      <div class="book-card">
+        <h4>El niño con trastorno del espectro autista: Estrategias prácticas</h4>
+        <p>Guía completa con enfoque práctico para padres, maestros y terapeutas. Incluye técnicas de comunicación, comportamiento y aprendizaje.</p>
+        <div class="author-tag">✍️ Varios autores (enfoque clínico)</div>
+      </div>
+      <div class="book-card">
+        <h4>Autismo: Manual de intervención educativa</h4>
+        <p>Enfoque psicopedagógico con estrategias concretas para el aula y el hogar. Ideal si buscas herramientas educativas basadas en evidencia.</p>
+        <div class="author-tag">✍️ Jesús Flórez</div>
+      </div>
+      <div class="book-card">
+        <h4>El autismo desde el corazón</h4>
+        <p>Una mirada sensible y profesional al autismo, abordando tanto la parte técnica como el impacto emocional en la familia.</p>
+        <div class="author-tag">✍️ Víctor M. Fernández</div>
+      </div>
+      <div class="book-card">
+        <h4>El autismo explicado a las personas autistas</h4>
+        <p>Especialmente diseñado para adolescentes y adultos con autismo, con lenguaje claro, imágenes y un enfoque de respeto y aceptación.</p>
+        <div class="author-tag">✍️ Bruno Gepner</div>
+      </div>
+      <div class="book-card">
+        <h4>Neurotribus: La diversidad del cerebro humano</h4>
+        <p>Un enfoque más amplio que reivindica el neurodesarrollo diverso. Ayuda a cambiar la mirada del "déficit" hacia la "diversidad".</p>
+        <div class="author-tag">✍️ Steve Silberman</div>
+      </div>
+      <div class="book-card">
+        <h4>El autismo: Un enfoque práctico para padres</h4>
+        <p>Orientación paso a paso sobre cómo abordar el día a día, desde las rutinas hasta las relaciones sociales, con calidez y rigor.</p>
+        <div class="author-tag">✍️ Tony Attwood</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="educacion">
+    <h2><span class="icon">🏫</span> Educación Inclusiva y Derechos de las Familias</h2>
+    <p style="color:var(--text2); margin-top:6px;">Conocer tus derechos es fundamental para garantizar que tu hijo reciba la educación y los apoyos que merece:</p>
+    <div class="tips-grid">
+      <div class="info-card">
+        <h4>📋 Educación inclusiva en México</h4>
+        <p>La Ley General de Educación establece el derecho a una educación inclusiva. Las escuelas deben hacer ajustes razonables y contar con apoyos especializados cuando sea necesario.</p>
+      </div>
+      <div class="info-card">
+        <h4>♿ Certificado de Discapacidad (CONDUSEF/CED)</h4>
+        <p>En México, tramitar el Certificado de Discapacidad ante el DIF o la Secretaría de Salud abre acceso a becas, apoyos económicos, terapias subsidiadas y estacionamientos preferenciales.</p>
+      </div>
+      <div class="info-card">
+        <h4>📄 Programa Educativo Individualizado (PEI)</h4>
+        <p>Si tu hijo asiste a una escuela regular, solicita un PEI o un plan de ajustes curriculares individualizados. Es un documento que adapta la enseñanza a sus necesidades específicas.</p>
+      </div>
+      <div class="info-card">
+        <h4>🏠 Apoyos del gobierno</h4>
+        <p>Investiga los programas de becas para personas con discapacidad de la SEP, apoyos del DIF local, pensiones para cuidadores y servicios de rehabilitación gratuitos o subsidiados en tu estado.</p>
+      </div>
+      <div class="info-card">
+        <h4>⚖️ No estás solo ante la escuela</h4>
+        <p>Si la escuela niega la inscripción o los apoyos, puedes acudir a la Comisión de Derechos Humanos local, a la Defensoría del Derecho a la Educación o buscar asesoría de organizaciones de padres.</p>
+      </div>
+      <div class="info-card">
+        <h4>🌎 Derechos en otros países</h4>
+        <p>En Argentina, Colombia, Chile, Perú y otros países de Latinoamérica también existen leyes de educación inclusiva y programas de apoyo. Consulta el Ministerio de Educación de tu país o asociaciones locales de autismo.</p>
+      </div>
+    </div>
+    <div class="highlight-box">
+      <h4>📝 Documentos útiles para tramitar</h4>
+      <p>Certificado de nacimiento, CURP, acta de diagnóstico por especialista, comprobante de domicilio, fotografías tamaño infantil y un informe médico o psicológico actualizado. Guarda copias de todo y haz un expediente organizado por si lo necesitas para trámites escolares o de apoyo gubernamental.</p>
+    </div>
+  </section>
+
+  <div class="forum-box" id="foro">
+    <h2><span class="icon">💬</span> Foro de Experiencias</h2>
+    <p style="color:var(--text2); margin-top:6px;">Comparte tu experiencia, pregunta o mensaje de apoyo para otras familias. Tu historia puede ayudar mucho. Este espacio es tuyo.</p>
+
+    <div class="comment-form">
+      <input type="text" id="cName" placeholder="Tu nombre (opcional)" />
+      <textarea id="cText" placeholder="Escribe tu comentario, experiencia o pregunta aquí..."></textarea>
+      <button class="btn" onclick="addComment()">Publicar comentario</button>
+    </div>
+
+    <div id="commentsList" class="comments-list">
+      <p class="empty-msg">Aún no hay comentarios. ¡Sé el primero en compartir tu experiencia!</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="puzzle-row">🧩 🧩 🧩</div>
+    <p>Con cariño para todas las familias del espectro.</p>
+    <p><strong>Deniss Alejandra Lozano Herrera</strong> — Futura Licenciada en Psicopedagogía</p>
+    <p style="font-size:0.8rem; margin-top:8px;">Esta página es orientativa y no reemplaza la atención profesional.</p>
+  </footer>
+
+</div>
+
+<script>
+  function addComment() {
+    const nameInput = document.getElementById('cName');
+    const textInput = document.getElementById('cText');
+    const list = document.getElementById('commentsList');
+    const name = nameInput.value.trim() || 'Anónimo';
+    const text = textInput.value.trim();
+
+    if (!text) {
+      alert('Por favor escribe un comentario antes de publicar.');
+      return;
+    }
+
+    const now = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const dateStr = now.toLocaleDateString('es-ES', options);
+
+    const emptyMsg = list.querySelector('.empty-msg');
+    if (emptyMsg) emptyMsg.remove();
+
+    const item = document.createElement('div');
+    item.className = 'comment-item';
+    item.innerHTML = '<div class="name">' + escapeHtml(name) + '</div>' +
+                     '<div class="date">' + dateStr + '</div>' +
+                     '<div class="text">' + escapeHtml(text) + '</div>';
+    list.prepend(item);
+
+    nameInput.value = '';
+    textInput.value = '';
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+</script>
+</body>
+</html>
